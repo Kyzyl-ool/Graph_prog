@@ -12,6 +12,7 @@ void sfInitWindow(unsigned int width, unsigned int height)
 	
 	sf::Sprite kitty_sprite;
 	kitty_sprite.setTexture(kitty_texture);
+	kitty_sprite.setTextureRect(sf::IntRect(0, 0, 96, 96));
 	kitty_sprite.setPosition(20, 50);
 	
 	 
