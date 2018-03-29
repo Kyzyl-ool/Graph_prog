@@ -5,7 +5,7 @@ void sfInitWindow(unsigned int width, unsigned int height)
 	sf::RenderWindow window(sf::VideoMode(width, height), "SFML Works!");
 	
 	sf::Image kitty;
-	kitty.loadFromFile("images/kitty.png");
+	kitty.loadFromFile("images/hero.png");
 	
 	sf::Texture kitty_texture;
 	kitty_texture.loadFromImage(kitty);
@@ -25,10 +25,13 @@ void sfInitWindow(unsigned int width, unsigned int height)
 				window.close();
 		}
 		
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {kitty_sprite.move(-0.1, 0);}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {kitty_sprite.move(0.1, 0);}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {kitty_sprite.move(0, 0.1);}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {kitty_sprite.move(0, -0.1);}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {kitty_sprite.move(-0.1, 0); kitty_sprite.setTextureRect(sf::IntRect(0, 96, 96, 96));}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {kitty_sprite.move(0.1, 0); kitty_sprite.setTextureRect(sf::IntRect(0, 192, 96, 96));}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {kitty_sprite.move(0, 0.1); kitty_sprite.setTextureRect(sf::IntRect(0, 0, 96, 96));}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {kitty_sprite.move(0, -0.1); kitty_sprite.setTextureRect(sf::IntRect(0, 288, 96, 384));}
+		
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {kitty_sprite.setColor(sf::Color::Red);}
+		else kitty_sprite.setColor(sf::Color::White);
 		
 		window.clear();
 		window.draw(kitty_sprite);
