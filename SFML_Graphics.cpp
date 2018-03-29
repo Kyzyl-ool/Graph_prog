@@ -3,6 +3,7 @@
 
 void sfInitWindow(unsigned int width, unsigned int height)
 {
+	float Current_frame = 0;
 	sf::Clock clocks;
 	
 	sf::RenderWindow window(sf::VideoMode(width, height), "SFML Works!");
@@ -17,6 +18,7 @@ void sfInitWindow(unsigned int width, unsigned int height)
 	kitty_sprite.setTexture(kitty_texture);
 	kitty_sprite.setTextureRect(sf::IntRect(0, 0, 96, 96));
 	kitty_sprite.setPosition(50, 50);
+	kitty_sprite.setScale(2, 2);
 	
 	 
 	while (window.isOpen())
@@ -33,10 +35,36 @@ void sfInitWindow(unsigned int width, unsigned int height)
 				window.close();
 		}
 		
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {kitty_sprite.move(-0.1*time, 0); kitty_sprite.setTextureRect(sf::IntRect(0, 96, 96, 96));}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {kitty_sprite.move(0.1*time, 0); kitty_sprite.setTextureRect(sf::IntRect(0, 192, 96, 96));}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {kitty_sprite.move(0, 0.1*time); kitty_sprite.setTextureRect(sf::IntRect(0, 0, 96, 96));}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {kitty_sprite.move(0, -0.1*time); kitty_sprite.setTextureRect(sf::IntRect(0, 288, 96, 384));}
+		
+		#define dt 0.0025
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			Current_frame += time*dt;
+			if (Current_frame > 3) Current_frame -= 3;
+			kitty_sprite.setTextureRect(sf::IntRect(96*int(Current_frame), 96, 96, 96));
+			kitty_sprite.move(-0.1*time, 0); 
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{	
+			Current_frame += time*dt;
+			if (Current_frame > 3) Current_frame -= 3;
+			kitty_sprite.setTextureRect(sf::IntRect(96*int(Current_frame), 192, 96, 96));
+			kitty_sprite.move(0.1*time, 0);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			Current_frame += time*dt;
+			if (Current_frame > 3) Current_frame -= 3;
+			kitty_sprite.move(0, 0.1*time);
+			kitty_sprite.setTextureRect(sf::IntRect(96*int(Current_frame), 0, 96, 96));
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			Current_frame += time*dt;
+			if (Current_frame > 3) Current_frame -= 3;
+			kitty_sprite.move(0, -0.1*time);
+			kitty_sprite.setTextureRect(sf::IntRect(96*int(Current_frame), 288, 96, 384));
+		}
 		
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {kitty_sprite.setColor(sf::Color::Red);}
 		else kitty_sprite.setColor(sf::Color::White);
