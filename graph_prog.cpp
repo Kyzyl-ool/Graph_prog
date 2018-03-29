@@ -1,10 +1,9 @@
-#include "graph.cpp"
 #include "SFML_Graphics.cpp"
 
 
 int main()
 {
-	sfInitWindow(1000, 500);
+	sfInitWindow(640, 480);
 		
 	 
 	return 0;
